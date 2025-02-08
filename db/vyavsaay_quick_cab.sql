@@ -219,7 +219,7 @@ INSERT INTO `cities` (`city_id`, `city_name`, `state_name`, `created_at`, `updat
 (107, 'Kollam', 'Kerala', '2024-12-12 22:00:34', '2024-12-12 22:00:34'),
 (108, 'Raghunathganj', 'West Bengal', '2024-12-12 22:00:34', '2024-12-12 22:00:34'),
 (109, 'Bilaspur', 'Chhattisgarh', '2024-12-12 22:00:34', '2024-12-12 22:00:34'),
-(110, 'Shahjahanpur', 'Uttar Pradesh', '2024-12-12 22:00:34', '2024-12-12 22:00:34'),
+(110, 'Shahjahanpurw', 'Uttar Pradesh', '2024-12-12 22:00:34', '2024-12-12 22:00:34'),
 (111, 'Thrissur', 'Kerala', '2024-12-12 22:00:34', '2024-12-12 22:00:34'),
 (112, 'Alwar', 'Rajasthan', '2024-12-12 22:00:34', '2024-12-12 22:00:34'),
 (113, 'Kakinada', 'Andhra Pradesh', '2024-12-12 22:00:34', '2024-12-12 22:00:34'),
