@@ -764,32 +764,51 @@ async function buySubscription(req, res) {
     const { vendorId, subscriptionId } = req.body;
 
     if (!vendorId || !subscriptionId) {
-      return res.status(400).json({ message: 'Vendor ID and Subscription ID are required.' });
+      return res.status(400).json({  message: 'Vendor ID and Subscription ID are required.' });
     }
 
+    // Find vendor
     const vendor = await VendorDetails.findByPk(vendorId);
     if (!vendor) {
       return res.status(404).json({ message: 'Vendor not found.' });
     }
 
+    // Find subscription plan
     const subscription = await sub_packages.findByPk(subscriptionId);
     if (!subscription) {
       return res.status(404).json({ message: 'Subscription plan not found.' });
     }
 
-    // Update vendor's subscription details
+    if (!subscription.duration_in_days) {
+      return res.status(400).json({ message: 'Subscription duration is missing.' });
+    }
+
+    let newSubscriptionDate;
+    
+    if (vendor.sub_end_date && new Date(vendor.sub_end_date) > new Date()) {
+      newSubscriptionDate = new Date(vendor.sub_end_date);
+    } else {
+      newSubscriptionDate = new Date();
+    }
+
+    const newEndDate = new Date(newSubscriptionDate);
+    newEndDate.setDate(newEndDate.getDate() + subscription.duration_in_days);
+
     vendor.subscriptionPlan = subscription.package_name;
-    vendor.subscription_date = new Date();
+    vendor.subscription_date = new Date(); // Always set to the current date and time
+    vendor.sub_end_date = newEndDate;
 
     await vendor.save();
 
     return res.status(200).json({
+      status:1,
       message: 'Subscription purchased successfully!',
       vendor: {
         id: vendor.id,
         name: vendor.fullname,
         subscriptionPlan: vendor.subscriptionPlan,
-        subscriptionDate: vendor.subscription_date
+        subscriptionDate: vendor.subscription_date,
+        subscriptionEndDate: vendor.sub_end_date
       }
     });
 
@@ -798,6 +817,9 @@ async function buySubscription(req, res) {
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 }
+
+
+
 
 
 

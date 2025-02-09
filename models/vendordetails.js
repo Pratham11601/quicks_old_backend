@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     carnumber: DataTypes.STRING,
     subscriptionPlan: DataTypes.STRING,
     subscription_date: DataTypes.DATE,
+    sub_end_date: DataTypes.DATE,
     vendor_gender: DataTypes.STRING,
   }, {
     sequelize,
