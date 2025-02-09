@@ -6,6 +6,9 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const path = require('path');
 
+const { VendorDetails, sub_packages } = require('../models');
+
+
 const fs = require('fs').promises;
 
 
@@ -84,6 +87,8 @@ function saveBasicVendorDetails(req, res) {
       });
     });
 }
+
+
 
 
 /// save data 
@@ -754,6 +759,48 @@ function getUserDetailsByPhone(req, res) {
     });
 }
 
+async function buySubscription(req, res) {
+  try {
+    const { vendorId, subscriptionId } = req.body;
+
+    if (!vendorId || !subscriptionId) {
+      return res.status(400).json({ message: 'Vendor ID and Subscription ID are required.' });
+    }
+
+    const vendor = await VendorDetails.findByPk(vendorId);
+    if (!vendor) {
+      return res.status(404).json({ message: 'Vendor not found.' });
+    }
+
+    const subscription = await sub_packages.findByPk(subscriptionId);
+    if (!subscription) {
+      return res.status(404).json({ message: 'Subscription plan not found.' });
+    }
+
+    // Update vendor's subscription details
+    vendor.subscriptionPlan = subscription.package_name;
+    vendor.subscription_date = new Date();
+
+    await vendor.save();
+
+    return res.status(200).json({
+      message: 'Subscription purchased successfully!',
+      vendor: {
+        id: vendor.id,
+        name: vendor.fullname,
+        subscriptionPlan: vendor.subscriptionPlan,
+        subscriptionDate: vendor.subscription_date
+      }
+    });
+
+  } catch (error) {
+    console.error('Error purchasing subscription:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
+
+
+
 function checkProfileCompletion(req, res) {
   const { id } = req.params; // Get vendor ID from request parameters
 
@@ -806,11 +853,19 @@ function checkProfileCompletion(req, res) {
         isComplete: false,
       });
     });
+
+
+
+
+
+
 }
 
 
-
 module.exports = {
+
+  buySubscription :buySubscription,
+
   checkSubscriptionExpiry: checkSubscriptionExpiry,
   updateVendorSubscriptionPlan: updateVendorSubscriptionPlan,
   uploadVendorImages: uploadVendorImages,

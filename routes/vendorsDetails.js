@@ -93,4 +93,11 @@ router.get('/checkSubscriptionExpiry/:id', vendorDetailsController.checkSubscrip
 router.put('/subscription/:id', vendorDetailsController.updateVendorSubscriptionPlan);
 
 
+router.post('/buy-subscription', vendorDetailsController.buySubscription);
+
+
+
+
+
+
 module.exports = router;
