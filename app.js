@@ -24,6 +24,7 @@ const catRoutes = require('./routes/category_routes');
 const subscriptions = require('./routes/subsription');
 const rzp_key = require('./routes/rzp_key_routes');
 const authRouter = require('./routes/otpless_integration');
+const sub_packages = require('./routes/sub_packages');
 
 app.use('/leads', postRoute);
 app.use('/vendorDetails', vendorDetailsRoute);
@@ -34,6 +35,7 @@ app.use('/categories', catRoutes); // All routes in cityRoutes will be prefixed 
 app.use('/subscriptions', subscriptions);
 app.use('/rzp_key', rzp_key);
 app.use('/auth', authRouter);
+app.use('/sub_packages', sub_packages);
 
 console.log("app ");
 

@@ -332,8 +332,8 @@ function editVendorDetails(req, res) {
 };
 
 function updateVendorSubscriptionPlan(req, res) {
-  const vendorId = req.params.id; // Get vendor ID from request parameters
-  const { subscriptionPlan } = req.body; // Extract subscriptionPlan from request body
+  const vendorId = req.params.id;
+  const { subscriptionPlan } = req.body; 
 
   if (!subscriptionPlan) {
     return res.status(400).json({
