@@ -63,7 +63,6 @@ router.post(
 
 router.get('/user-details/:phone', vendorDetailsController.getUserDetailsByPhone);
 
-
 // Route to update vendor email
 router.post('/update-email', vendorDetailsController.updateEmail);
 
@@ -86,6 +85,9 @@ router.patch('/:id', upload.fields([
 router.post('/get/:id',vendorDetailsController.getVendorDetailsById );
 
 router.get('/checkProfileCompletion/:id', vendorDetailsController.checkProfileCompletion);
+
+
+
 
 router.get('/checkSubscriptionExpiry/:id', vendorDetailsController.checkSubscriptionExpiry);
 router.put('/subscription/:id', vendorDetailsController.updateVendorSubscriptionPlan);

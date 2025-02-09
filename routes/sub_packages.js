@@ -8,4 +8,7 @@ router.get('/', subPackagesController.getAllSubPackages);
 // Route to add a new sub-package
 router.post('/', subPackagesController.addSubPackage);
 
+
+router.put('/edit/:id', subPackagesController.editSubPackage);
+
 module.exports = router;
