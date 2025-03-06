@@ -16,17 +16,17 @@ module.exports = (sequelize, DataTypes) => {
       vendor_name: DataTypes.STRING,
       location_from: DataTypes.STRING,
       location_from_area: {
-        type: DataTypes.STRING,  // Make sure this field is defined
+        type: DataTypes.STRING,  
         allowNull: true,
       },
       to_location: DataTypes.STRING,
       to_location_area: {
-        type: DataTypes.STRING,  // Make sure this field is defined
+        type: DataTypes.STRING,  
         allowNull: true,
       },
-      car_model: DataTypes.STRING, // Add car_model here
-      add_on: DataTypes.STRING, // Add car_model here
-      fare: DataTypes.DECIMAL(10, 2), // Add fare here
+      car_model: DataTypes.STRING,
+      add_on: DataTypes.STRING, 
+      fare: DataTypes.DECIMAL(10, 2), 
       time: DataTypes.STRING,
       is_active: DataTypes.BOOLEAN,
       vendor_contact: DataTypes.STRING,

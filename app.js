@@ -2,10 +2,21 @@ const express = require('express');
 const helmet = require('helmet');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 
 const app = express();
 app.use(helmet());
 app.use(bodyParser.json({ limit: '50mb' }));
+
+
+app.use(cors());
+
+app.use(cors({
+    origin: '*', // Replace with your allowed origin
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers
+}));
 
 
 global.__basedir = __dirname;
@@ -30,8 +41,8 @@ app.use('/leads', postRoute);
 app.use('/vendorDetails', vendorDetailsRoute);
 app.use('/help_support', help_supportRoute);
 app.use('/advertise', advertiseRouter); 
-app.use('/cities', cityRoutes); // All routes in cityRoutes will be prefixed with /api
-app.use('/categories', catRoutes); // All routes in cityRoutes will be prefixed with /api
+app.use('/cities', cityRoutes);
+app.use('/categories', catRoutes); 
 app.use('/subscriptions', subscriptions);
 app.use('/rzp_key', rzp_key);
 app.use('/auth', authRouter);

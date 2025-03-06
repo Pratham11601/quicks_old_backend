@@ -308,11 +308,12 @@ function showHistorydata(req, res) {
     }).then(result => {
         const { count, rows } = result;
         res.status(200).json({
+            message: "Fetch successful",
             totalItems: count,
             totalPages: Math.ceil(count / pageSize),
             currentPage: page,
             leads: rows,
-            message: "Fetch successful"
+          
         });
     }).catch(error => {
         console.error("Error fetching leads:", error);
