@@ -328,6 +328,10 @@ function showeveryLead(req, res) {
     const pageSize = parseInt(req.query.pageSize) || 15;
     const offset = (page - 1) * pageSize;
 
+
+
+    console.log("hello uped");
+
     models.Lead.findAndCountAll({
         order: [['createdAt', 'DESC']], // Order by createdAt in descending order
         limit: pageSize,
