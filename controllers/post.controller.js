@@ -109,7 +109,7 @@ function getDistinctLocationtoValues(req, res) {
 function show(req, res) {
 
     models.Lead.findAll({
-        order: [['date', 'DESC']] // Sort by date in descending order
+        order: [['id', 'DESC']]   
     }).then(
         result => {
             res.status(200).json({
