@@ -29,7 +29,6 @@ async function stats(req, res)  {
       totalLeads,
       activeLeads,
       inactiveLeads,
-      todayLeads,
       currentMonthLeads,
     });
   } catch (error) {
