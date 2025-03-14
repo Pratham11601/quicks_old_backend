@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.post('/', postsController.save);
 router.get('/', postsController.show);
+router.get('/stats', postsController.stats);
 router.get('/active', postsController.showOnlyActive);
 router.get('/history', postsController.showHistorydata);
 router.get('/all', postsController.showeveryLead);

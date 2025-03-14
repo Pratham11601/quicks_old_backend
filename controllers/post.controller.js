@@ -1,6 +1,50 @@
 const { DataTypes, Model  } = require('sequelize');
 const { sequelize } = require('../models');
 const models = require('../models');
+const { Lead } = require('../models');
+
+const { Op } = require('sequelize');
+
+// Function to get lead statistics
+async function stats(req, res)  {
+  try {
+    const totalLeads = await Lead.count();
+    const activeLeads = await Lead.count({ where: { is_active: true } });
+    const inactiveLeads = await Lead.count({ where: { is_active: false } });
+
+    const today = new Date();
+    const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const todayLeads = await Lead.count({ where: { date: todayStart } });
+
+    const currentMonthStart = new Date(today.getFullYear(), today.getMonth(), 1);
+    const currentMonthLeads = await Lead.count({
+      where: {
+        date: {
+          [Op.gte]: currentMonthStart,
+        }
+      }
+    });
+
+    res.json({
+      totalLeads,
+      activeLeads,
+      inactiveLeads,
+      todayLeads,
+      currentMonthLeads,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while fetching lead statistics.' });
+  }
+  }
+
+
+
+
+
+
+
+
 
 
 function save(req, res) {
@@ -357,6 +401,7 @@ function showeveryLead(req, res) {
 
 module.exports = {
     save: save,
+    stats: stats,
     edit: edit,
     show: show,
     index: index,
