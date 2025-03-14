@@ -6,11 +6,11 @@
     try {
         const { name, url } = req.body;
 
-        // Check if file was uploaded
+       
         const imagePath = req.file ? req.file.path : null;
 
         const newAdvertise = await models.advertise.create({
-            image: imagePath, // Save image path
+            image: imagePath, 
             name,
             url,
         });
@@ -31,17 +31,27 @@
   };
 
 
-  async function getAdvertisements(req, res) {
+  async function getAdvertisements(req, res) {  
     try {
         const advertisements = await models.advertise.findAll();
 
         const formattedAdvertisements = advertisements.map(ad => {
             return {
-                image: ad.image || " ", // Use a default value if image is null or undefined
+                id: ad.id,
+                image: ad.image || " ", 
+                postedFrom: ad.name || " ", 
+                date: ad.createdAt || " ", 
+
+               
+
             };
         });
 
-        res.status(200).json(formattedAdvertisements);
+        res.status(200).json(
+           
+            formattedAdvertisements
+        
+        );
     } catch (error) {
         console.error(error);
         res.status(500).json({
@@ -51,7 +61,40 @@
     }
   };
 
+
+  async function deleteAdvertisement(req, res) {
+    try {
+        const { id } = req.params; 
+
+        const advertisement = await models.advertise.findByPk(id);
+
+        if (!advertisement) {
+            return res.status(404).json({
+                success: false,
+                message: 'Advertisement not found'
+            });
+        }
+
+        await advertisement.destroy();
+
+        return res.status(200).json({
+            success: true,
+            message: 'Advertisement deleted successfully'
+        });
+    } catch (error) {
+        console.error('Error deleting advertisement:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error',
+            error: error.message
+        });
+    }
+}
+
+
+
   module.exports = {
       saveAdvertisement :saveAdvertisement,
+      deleteAdvertisement :deleteAdvertisement,
       getAdvertisements:getAdvertisements
   };

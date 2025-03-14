@@ -23,6 +23,7 @@ const upload = multer({ storage: storage });
 
 router.post('/', upload.single('image'), advertiseController.saveAdvertisement);
 router.get('/', advertiseController.getAdvertisements);
+router.delete('/delete/:id', advertiseController.deleteAdvertisement);
 
 
 module.exports = router;
