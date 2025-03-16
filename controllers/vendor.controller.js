@@ -537,7 +537,7 @@ function getVendorDetailsById(req, res) {
 
 
 function showAllVendors(req, res) {
-  models.VendorDetails.findAll()
+  models.VendorDetails.findAll({ order: [['id', 'DESC']]   })
     .then(vendors => {
       res.status(200).json({
         status: true,
