@@ -14,9 +14,9 @@ app.use(bodyParser.json({ limit: '50mb' }));
 
 const allowedOrigins = [
     '*',
-    'https://quickcabpune.com',
+    'https://quickcabpune.com/',
     'https://quickcabpune.com/app',
-    'https://quickcabadmin.co.in'
+    'https://quickcabadmin.co.in/'
 ];
 
 const corsOptions = {
