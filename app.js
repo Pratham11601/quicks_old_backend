@@ -15,7 +15,7 @@ app.use(bodyParser.json({ limit: '50mb' })); // Body parser for JSON with a limi
 const allowedOrigins = [
     'https://quickcabpune.com',
     'https://quickcabpune.com/app',
-    'https://quickcabadmin.com'
+    'https://quickcabadmin.co.in'
 ];
 
 const corsOptions = {
