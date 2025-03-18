@@ -1,16 +1,18 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "hello",
+
+    "password": "Sync@116",
+    "database": "sync_quickcab_db",
+
     "host": "127.0.0.1",
     "dialect": "mysql",
     "port": 3306
   },
   "test": {
     "username": "root",
-    "password": "Sync@116",
-    "database": "sync_quickcab_db",
+    "password": null,
+    "database": "hello",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "port": 3306

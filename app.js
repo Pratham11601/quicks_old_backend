@@ -10,7 +10,7 @@ app.use(helmet());
 app.use(bodyParser.json({ limit: '50mb' }));
 
 
-app.use(bodyParser.json({ limit: '50mb' })); // Body parser for JSON with a limit
+app.use(bodyParser.json({ limit: '50mb' }));
 
 const allowedOrigins = [
     'https://quickcabpune.com',
