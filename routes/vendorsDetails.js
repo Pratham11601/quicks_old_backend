@@ -55,15 +55,8 @@ router.post(
   vendorDetailsController.uploadVendorImages
 );
 
-
-// // Route to reset password
-// router.post('/resetpassword', vendorDetailsController.resetPassword);
-
-// Assuming you have already set up your Express router
-
 router.get('/user-details/:phone', vendorDetailsController.getUserDetailsByPhone);
 
-// Route to update vendor email
 router.post('/update-email', vendorDetailsController.updateEmail);
 
 router.post('/resetpassword', vendorDetailsController.resetPassword);

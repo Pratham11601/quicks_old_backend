@@ -10,14 +10,27 @@ app.use(helmet());
 app.use(bodyParser.json({ limit: '50mb' }));
 
 
-app.use(cors());
+app.use(bodyParser.json({ limit: '50mb' })); // Body parser for JSON with a limit
 
-app.use(cors({
-    origin: '*', // Replace with your allowed origin
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'] // Allowed headers
-}));
+const allowedOrigins = [
+    'https://quickcabpune.com',
+    'https://quickcabpune.com/app',
+    'https://quickcabadmin.com'
+];
 
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
 
 global.__basedir = __dirname;
 
